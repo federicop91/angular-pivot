@@ -9,7 +9,7 @@
                 // Build Pivot
                 var render = function(data, config){
                     if(data !== undefined){
-                        element.pivotUI(data);
+                       jQuery(element).pivotUI(data, scope[attrs.options]);
                     }else{
                         throw "Invalid data input on angular-pivot directive :) -"
                     }
@@ -32,7 +32,7 @@
                     });
                 }else{
                     // First render
-                    render(scope.$eval(attrs.ngPivot), config);
+                    render(scope.$eval(attrs.ngPivot),config);
                     var config = {};
                 }
 
