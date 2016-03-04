@@ -1,7 +1,7 @@
 (function(){
     var module = angular.module('angular-pivottable', []);
-
-    module.directive('ngPivot', function(){
+// Inyect a $timeout function
+    module.directive('ngPivot', ['$timeout', function($timeout ){
         return {
             restrict: 'A',
             link: function(scope, element, attrs) {
@@ -9,8 +9,8 @@
                 // Build Pivot
                 var render = function(data, config){
                     if(data !== undefined){
-                       jQuery(element).pivotUI(data, scope[attrs.options]);
-                    }else{
+                        jQuery(element).pivotUI(data, scope[attrs.options]);
+                     }else{
                         throw "Invalid data input on angular-pivot directive :) -"
                     }
                 }
@@ -27,12 +27,13 @@
                                 renderers : renderers
                             };
                             // First render
-                            render(scope.$eval(attrs.ngPivot), config);
+                            //pruebo esto
+                            $timeout (function (){render(scope.$eval(attrs.ngPivot), config)},1000);
                         }
                     });
                 }else{
                     // First render
-                    render(scope.$eval(attrs.ngPivot),config);
+                    $timeout (function (){render(scope.$eval(attrs.ngPivot), config)},1000);
                     var config = {};
                 }
 
@@ -44,5 +45,5 @@
 
             }
         }
-    })
+    }])
 })();
